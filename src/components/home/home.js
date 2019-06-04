@@ -8,7 +8,7 @@ class Home extends React.Component {
       this.state = {
           valor: '',
           dataVencimento: '',
-          data: ''
+          data: []
       };
   
       this.handleSubmit = this.handleSubmit.bind(this);
@@ -35,10 +35,25 @@ class Home extends React.Component {
                     dataVencimento : converterData(data)
                 }
         }).then((response) =>{
-            console.log('oiii')
+            console.log(response.data[0])
+            this.setState({
+                data: JSON.stringify(response.data[0])
+              });
         }).catch((err) => {
             console.log(err)
         })
+    }
+
+    renderCard() {
+        if (this.state.data) {
+            return(
+                <CardPanel className="teal">
+                    <span className="white-text">
+                        {this.state.data}
+                    </span>
+                </CardPanel>
+            )
+        }
     }
 
     render() {
@@ -60,11 +75,7 @@ class Home extends React.Component {
                     </Icon>
                 </Button>
         </form>
-        <CardPanel className="teal">
-            <span className="white-text">
-                {this.state.data}
-            </span>
-        </CardPanel>
+        {this.renderCard()}
         </div>
         
       );
