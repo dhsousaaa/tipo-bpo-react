@@ -45,7 +45,7 @@ class Home extends React.Component {
     }
 
     renderCard() {
-        if (this.state.data) {
+        if (this.state.data != '') {
             return(
                 <CardPanel className="teal">
                     <span className="white-text">
